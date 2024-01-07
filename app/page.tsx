@@ -19,8 +19,8 @@ const HomePage = async () => {
     <div className="max-w-4xl mx-auto p-2 space-y-8 lg:w-[35rem] lg:h-[35rem]">
       {ArticleArray.map((article) => (
         <div key={article.userId} className="">
-          <div className="flex justify-between p-8">
-            <div className="flex space-x-4 lg:space-x-10">
+          <div className="flex justify-between p-8 bg-gray-300">
+            <div className="flex space-x-4 lg:space-x-10 ">
               <img
                 src={article.ProfileImage}
                 alt=""
