@@ -39,6 +39,8 @@ function Article() {
 
     const fileRef = await ref(storage, `${docRef.id}`);
 
+    if (!file) return;
+
     uploadBytes(fileRef, file).then(async (snapshot) => {
       const downloadURL = await getDownloadURL(fileRef);
 
