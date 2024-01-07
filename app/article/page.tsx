@@ -14,11 +14,12 @@ import { uploadBytes } from "firebase/storage";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
+import { resizeImage } from "@/utils/imageUtils";
 
 function Article() {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<File | null>(null);
 
   const { user } = useUser();
   const router = useRouter();
@@ -62,8 +63,18 @@ function Article() {
     setDescription(e.target.value);
   };
 
-  const handleFileInput = (e: any) => {
-    setFile(e.target.files[0]);
+  const handleFileInput = async (e: any) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      try {
+        const resizedFile = await resizeImage(file, 800, 600, 0.8);
+        setFile(resizedFile);
+      } catch (error) {
+        console.error("Error handling file:", error);
+      }
+    }
+    // setFile(e.target.files[0]);
   };
 
   return (

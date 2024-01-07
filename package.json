@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.1",
+    "browser-image-compression": "^2.0.2",
     "draft-js": "^0.11.7",
     "firebase": "^10.7.1",
     "next": "14.0.4",
