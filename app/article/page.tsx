@@ -68,6 +68,8 @@ function Article() {
 
     if (file) {
       try {
+        const renamedFile = renameFile(file, "newFileName"); // Replace 'newFileName' with the desired name
+
         const resizedFile = await resizeImage(file, 800, 600, 0.8);
         setFile(resizedFile);
       } catch (error) {
@@ -75,6 +77,11 @@ function Article() {
       }
     }
     // setFile(e.target.files[0]);
+  };
+
+  const renameFile = (file: File, newName: string): File => {
+    const renamed = new File([file], newName, { type: file.type });
+    return renamed;
   };
 
   return (
