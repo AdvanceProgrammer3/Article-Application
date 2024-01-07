@@ -8,7 +8,7 @@ const Header = () => {
   // console.log(user);
 
   return (
-    <header className="flex flex-col max-w-7xl mx-auto bg-black p-8 text-white space-y-4">
+    <header className="flex flex-col max-w-7xl mx-auto bg-black p-8 text-white space-y-4 ">
       <div className="flex space-x-6 items-center justify-between">
         <Link href="/" className="text-sm font-bold text-pink-600">
           Article App

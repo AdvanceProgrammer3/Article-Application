@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { resizeImage } from "@/utils/imageUtils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Article() {
   const [title, setTitle] = useState();
@@ -44,15 +46,14 @@ function Article() {
 
     uploadBytes(fileRef, file).then(async (snapshot) => {
       const downloadURL = await getDownloadURL(fileRef);
+      console.log("Image Uploaded");
 
       await updateDoc(doc(db, "Articles", docRef.id), {
         downloadURL: downloadURL,
       });
-
-      console.log("Uploaded a blob or file!");
     });
 
-    alert("Post Added Successfully");
+    toast("File Uploaded Successfully");
     router.push("/");
   };
 
@@ -85,7 +86,7 @@ function Article() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-10 p-4">
+    <div className="max-w-7xl mx-auto mt-10 p-4 bg-[#800080]">
       <form action="" className="flex flex-col gap-8">
         <input
           type="text"
@@ -108,7 +109,19 @@ function Article() {
 
         {/* Image Picker */}
 
-        <input type="file" name="" id="" onChange={handleFileInput} />
+        <div className="flex justify-center items-center flex-col lg:flex-row">
+          <input type="file" name="" id="" onChange={handleFileInput} />
+
+          <div className="h-64 w-64 rounded-md">
+            {file && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                className="rounded-md bg-red-400 h-full w-full"
+              />
+            )}
+          </div>
+        </div>
 
         <button
           onClick={handleArticleFormSubmit}
@@ -116,8 +129,12 @@ function Article() {
           hover:text-green-400 
           "
         >
+          <ToastContainer />
           Post Article
         </button>
+
+        {/* Toast */}
+        {/* <button onClick={notify}>Notify!</button> */}
       </form>
     </div>
   );
